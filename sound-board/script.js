@@ -1,18 +1,21 @@
-const imgs = document.getElementById('imgs');
+const sounds = ['A Thousand Miles', 'I Love You 3000', 'RIDE'];
 
-let idx = 0;
+sounds.forEach((sound) => {
+    const btn = document.createElement('button');
+    btn.classList.add('btn');
 
-const img = document.querySelectorAll('#imgs img');
+    btn.innerText = sound;
+    btn.addEventListener('click', () => {
+        stopSongs();
+        document.getElementById(sound).play();
+    });
+    document.body.appendChild(btn);
+});
 
-function run() {
-    idx++;
-    if (idx > img.length - 1) {
-        idx = 0;
-    }
-
-    imgs.style.transform = `translateX(${-idx * 500}px)`;
-
-    setTimeout(run, 2000);
-}
-
-run();
+function stopSongs() {
+    sounds.forEach(sound => {
+        const song = document.getElementById(sound);
+        song.pause();
+        song.currentTime = 0;
+    });
+};
